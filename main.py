@@ -25,25 +25,25 @@ def count_characters(word_list):
         
     return(dictionary)
 
+def list_of_dictionaries(dictionary):
+    this_is_stupid = []
+
+    for entry in dictionary:
+        if entry.isalpha():
+            this_is_stupid.append({"char": entry, "num": dictionary[entry]})   
+    return(this_is_stupid)
+
 def print_to_console(list, word_count, book_path):
     print(f"--- Begin Report of {book_path} ---")
     print(f"{word_count} words found in the document")
     print()
     print()
     for entry in list:
-        for part in entry:
-            print(f"The '{part}' character was found {entry[part]} times")
+        print(f"The '{entry['char']}' character was found {entry['num']} times")
     print(f"--- End Report ---")
 
-def list_of_dictionaries(dictionary):
-    this_is_stupid = []
-
-    for entry in dictionary:
-        if entry.isalpha():
-            this_is_stupid.append({entry: dictionary[entry]})   
-    return(this_is_stupid)
-
-
+def sort_on(dictionary):
+    return dictionary['num']
 
 
 
@@ -61,6 +61,8 @@ def main():
     dictionary = count_characters(lower_case)
     word_count = count_words(words)
     list_of_dicts = list_of_dictionaries(dictionary)
+    
+    list_of_dicts.sort(reverse=True, key=sort_on)
     
     print_to_console(list_of_dicts, word_count, book_path)
 
