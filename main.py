@@ -13,19 +13,43 @@ def to_lower(list):
 
     return(temp_list)
 
+def count_characters(word_list):
+    dictionary = {}
+
+    for word in word_list:
+        for letter in word:
+            if letter not in dictionary:
+                dictionary[letter] = 1
+            else:
+                dictionary[letter] = dictionary[letter] + 1
+        
+    return(dictionary)
+
+def print_to_console(dictionary, word_count, book_path):
+    print(f"--- Begin Report of {book_path} ---")
+    print(f"{word_count} words found in the document")
+    print()
+    print()
+    for entry in dictionary:
+        print(f"The '{entry}' character was found {dictionary[entry]} times")
+
+
 
 # Main Program
 def main():
     
-    dictionary = {}
-    
-    with open("books/frankenstein.txt") as f:
+    book_path = "books/frankenstein.txt"
+
+    with open(book_path) as f:
         file_contents = f.read()
     words = split_string(file_contents)
-    length = count_words(words)
     lower_case = to_lower(words)
+    
+    dictionary = count_characters(lower_case)
+    word_count = count_words(words)
 
-    print (lower_case)
+    print_to_console(dictionary, word_count, book_path)
+
 
  
 
