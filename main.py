@@ -25,13 +25,26 @@ def count_characters(word_list):
         
     return(dictionary)
 
-def print_to_console(dictionary, word_count, book_path):
+def print_to_console(list, word_count, book_path):
     print(f"--- Begin Report of {book_path} ---")
     print(f"{word_count} words found in the document")
     print()
     print()
+    for entry in list:
+        for part in entry:
+            print(f"The '{part}' character was found {entry[part]} times")
+    print(f"--- End Report ---")
+
+def list_of_dictionaries(dictionary):
+    this_is_stupid = []
+
     for entry in dictionary:
-        print(f"The '{entry}' character was found {dictionary[entry]} times")
+        if entry.isalpha():
+            this_is_stupid.append({entry: dictionary[entry]})   
+    return(this_is_stupid)
+
+
+
 
 
 
@@ -47,11 +60,9 @@ def main():
     
     dictionary = count_characters(lower_case)
     word_count = count_words(words)
-
-    print_to_console(dictionary, word_count, book_path)
-
-
- 
+    list_of_dicts = list_of_dictionaries(dictionary)
+    
+    print_to_console(list_of_dicts, word_count, book_path)
 
 
 main()
